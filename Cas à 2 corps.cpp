@@ -32,27 +32,28 @@ void gravitationalForce(Body body1, Body body2) {
 }
 
 // Mise à jour des positions et vitesses selon la méthode d'Euler
-void updatePositionVelocity(Body body1, Body body2, double fx, double fy, double fz, double dt) {
+void updatePositionVelocity(Body body1, double fx, double fy, double fz, double dt) {
     // Calcul des accélérations
     double ax = fx / body1.mass;
     double ay = fy / body1.mass;
     double az = fz / body1.mass;
 
     // Mise à jour des vitesses
-    body.vx += ax * dt;
-    body.vy += ay * dt;
-    body.vz += az * dt;
+    body1.vx += ax * dt;
+    body1.vy += ay * dt;
+    body1.vz += az * dt;
 
     // Mise à jour des positions
-    body.x += body.vx * dt;
-    body.y += body.vy * dt;
-    body.z += body.vz * dt;
+    body1.x += body1.vx * dt;
+    body1.y += body1.vy * dt;
+    body1.z += body1.vz * dt;
 }
 
 int main() {
     // Initialisation des positions et vitesses
     Body europa = { 670900000.0, 0.0, 0.0, 0.0, 15000.0, 0.0, 4.799e22 };  // Europa autour de Jupiter
     Body ganymede = { 1070400000.0, 0.0, 0.0, 0.0, 11000.0, 0.0, 1.4819e23 };  // Ganymède autour de Jupiter
+    Body Jupiter = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 10}; // Jupiter
 
     // Paramètres de simulation
     double dt = 10000.0;  // Pas de temps en secondes
@@ -64,8 +65,8 @@ int main() {
         double fx_europa, fy_europa, fz_europa;
         double fx_ganymede, fy_ganymede, fz_ganymede;
 
-        gravitationalForce(europa, ganymede, fx_europa, fy_europa, fz_europa);
-        gravitationalForce(ganymede, europa, fx_ganymede, fy_ganymede, fz_ganymede);
+        gravitationalForce(europa, ganymede);
+        gravitationalForce(ganymede, europa);
 
         // Mise à jour des positions et vitesses
         updatePositionVelocity(europa, fx_europa, fy_europa, fz_europa, dt);
@@ -73,9 +74,9 @@ int main() {
 
         // Affichage des positions des satellites (optionnel)
         if (i % 100 == 0) {  // Afficher les positions tous les 100 pas de temps
-            std::cout << "Step " << i << ":\n";
-            std::cout << "Europa: (" << europa.x << ", " << europa.y << ", " << europa.z << ")\n";
-            std::cout << "Ganymede: (" << ganymede.x << ", " << ganymede.y << ", " << ganymede.z << ")\n";
+            cout << "Step " << i << ":\n";
+            cout << "Europa: (" << europa.x << ", " << europa.y << ", " << europa.z << ")\n";
+            cout << "Ganymede: (" << ganymede.x << ", " << ganymede.y << ", " << ganymede.z << ")\n";
         }
     }
 
