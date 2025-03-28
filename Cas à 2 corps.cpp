@@ -5,7 +5,7 @@ using namespace std;
 double T;
 double a;
 double G = 6.6743*pow(10, -11);
-double M = 1.898e27;
+double M = 100;
 
 
 
@@ -49,15 +49,33 @@ void updatePositionVelocity(Body body1, double fx, double fy, double fz, double 
     body1.z += body1.vz * dt;
 }
 
+    // Constantes
+double steps = 1000;   // Nombre d'étapes
+
+// Fonction d'évolution
+void evolve(double& x, double& y, double& vx, double& vy) {
+    // Calcul de la distance rint main() {
+    
+ }
+
+// Méthode RK4
+double rk4(double f(double, double), double t, double y, double h) {
+  double k1 = f(t, y);
+  double k2 = f(t + 0.5*h, y + 0.5*h*k1);
+  double k3 = f(t + 0.5*h, y + 0.5*h*k2);
+  double k4 = f(t + h, y + h*k3);
+  return y + (h/6) * (k1 + 2*k2 + 2*k3 + k4);
+}
+
 int main() {
     // Initialisation des positions et vitesses
-    Body europa = { 670900000.0, 0.0, 0.0, 0.0, 15000.0, 0.0, 4.799e22 };  // Europa autour de Jupiter
-    Body ganymede = { 1070400000.0, 0.0, 0.0, 0.0, 11000.0, 0.0, 1.4819e23 };  // Ganymède autour de Jupiter
+    Body europa = { 6.0, 0.0, 0.0, 0.0, 15.0, 0.0, 4 };  // Europa autour de Jupiter
+    Body ganymede = { 10.0, 0.0, 0.0, 0.0, 11.0, 0.0, 1};  // Ganymède autour de Jupiter
     Body Jupiter = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 10}; // Jupiter
 
     // Paramètres de simulation
-    double dt = 10000.0;  // Pas de temps en secondes
-    int numSteps = 10000;  // Nombre d'itérations de simulation
+    double dt = 10.0;  // Pas de temps en secondes
+    int numSteps = 100;  // Nombre d'itérations de simulation
 
     // Simulation des mouvements
     for (int i = 0; i < numSteps; ++i) {
@@ -78,6 +96,17 @@ int main() {
             cout << "Europa: (" << europa.x << ", " << europa.y << ", " << europa.z << ")\n";
             cout << "Ganymede: (" << ganymede.x << ", " << ganymede.y << ", " << ganymede.z << ")\n";
         }
+
+        // Conditions initiales
+    double x = 1.0;
+    double y = 0.0;
+    double vx = 0.0;
+    double vy = 1.0;
+
+    for (int i = 0; i < steps; ++i) {
+        evolve(x, y, vx, vy);
+        cout << "t = " << i*dt << " x = " << x << " y = " << y << endl;
+     }
     }
 
     return 0;
