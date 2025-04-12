@@ -6,9 +6,6 @@ using namespace std;
 double T;
 double a;
 double G = 6.6743*pow(10, -11);
-double M = 100;
-
-
 
 
 // Structure pour représenter un corps céleste
