@@ -70,6 +70,9 @@ int main() {
     ofstream PosIo("Io.txt");
     ofstream PosEurope("Europe.txt");
     ofstream PosGanymede("Ganymede.txt");
+    ofstream gravio("GravIo.txt");
+    ofstream graveu("GravEu.txt");
+    ofstream gravga("Gravga.txt");
     // Initialisation des positions et vitesses
     // Body io = {1, 0, 0, 5, 11, 0, 0.0011}; // Io autour de Jupiter
     // Body europa = { 5.0, 0.0, 0.0, 8.84706, 15.0, 0.0, 0.00253 };  // Europa autour de Jupiter
@@ -154,6 +157,9 @@ int main() {
     PosIo.close();
     PosEurope.close();
     PosGanymede.close();
+    gravio.close();
+    graveu.close();
+    gravga.close();
 
     return 0;
 }
