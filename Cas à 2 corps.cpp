@@ -110,8 +110,8 @@ int main() {
         gravitationalForce(ganymede, io, fx_io3, fy_io3, fz_io3);
 
         // Mise à jour des positions et vitesses
-        updatePositionVelocity(io, fx_io1+fx_io2+io3, fy_io1+fy_io2+io3, fz_io1+fz_io2+io3, dt);
-        updatePositionVelocity(europa, fx_europa1+fx_europa2+europa3, fy_europa1+fy_europa2+europa3, fz_europa1+fz_europa2+europa3, dt);
+        updatePositionVelocity(io, fx_io1+fx_io2+fx_io3, fy_io1+fy_io2+fy_io3, fz_io1+fz_io2+fz_io3, dt);
+        updatePositionVelocity(europa, fx_europa1+fx_europa2+fx_europa3, fy_europa1+fy_europa2+fy_europa3, fz_europa1+fz_europa2+fz_europa3, dt);
         updatePositionVelocity(ganymede, fx_ganymede1+fx_ganymede2+fx_ganymede3, fy_ganymede1+fy_ganymede2+fy_ganymede3, fz_ganymede1+fz_ganymede2+fz_ganymede3, dt);
 
         // Affichage des positions des satellites
