@@ -90,7 +90,7 @@ int main() {
 
     PosIo << 't' << '\t' << 'x' << endl;
     PosEurope << 't' << '\t' << 'x' << endl;
-    PosGanydeme << 't' << '\t' << 'x' << endl;
+    PosGanymede << 't' << '\t' << 'x' << endl;
 
     // Simulation des mouvements
     for (int i = 0; i < numSteps; ++i) {
