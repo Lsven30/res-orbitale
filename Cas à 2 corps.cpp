@@ -130,9 +130,9 @@ int main() {
             cout << "Io: (" << io.x << ", " << io.y << ", " << io.z << ")\n";
             cout << "Europa: (" << europa.x << ", " << europa.y << ", " << europa.z << ")\n";
             cout << "Ganymede: (" << ganymede.x << ", " << ganymede.y << ", " << ganymede.z << ")\n";
-            PosIo << i << '\t' << io.x << endl;
-            PosEurope << i << '\t' << europa.x << endl;
-            PosGanymede << i << '\t' << ganymede.x << endl;
+            PosIo << i*dt/86400 << '\t' << io.x/1000 << endl;
+            PosEurope << i*dt/86400 << '\t' << europa.x/1000 << endl;
+            PosGanymede << i*dt/86400 << '\t' << ganymede.x/1000 << endl;
         
 
         // Conditions initiales
