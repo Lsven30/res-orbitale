@@ -125,7 +125,7 @@ int main() {
         updatePositionVelocity(ganymede, fx_ganymede1+fx_ganymede2+fx_ganymede3, fy_ganymede1+fy_ganymede2+fy_ganymede3, fz_ganymede1+fz_ganymede2+fz_ganymede3, dt);
 
         // Affichage des positions des satellites
-        for (i=0,i<numSteps,i++) {  // Afficher les positions pour chaque step
+        // Afficher les positions pour chaque step
             cout << "Step " << i << ":\n";
             cout << "Io: (" << io.x << ", " << io.y << ", " << io.z << ")\n";
             cout << "Europa: (" << europa.x << ", " << europa.y << ", " << europa.z << ")\n";
@@ -133,7 +133,7 @@ int main() {
             PosIo << i << '\t' << io.x << endl;
             PosEurope << i << '\t' << europa.x << endl;
             PosGanymede << i << '\t' << ganymede.x << endl;
-        }
+        
 
         // Conditions initiales
     double x = 1.0;
