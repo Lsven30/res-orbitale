@@ -93,10 +93,10 @@ int main() {
         double fx_io2, fy_io2, fz_io2;
         // Calcul forces entre Io et Europa
         double fx_europa3, fy_europa3, fz_europa3;
-        double fx_io3, fy_io3, fz_io3;
+        double fx_io1, fy_io1, fz_io1;
          // Calcul forces entre Io et Ganymède
-        double fx_ganymede4, fy_ganymede4, fz_ganymede4;
-        double fx_io4, fy_io4, fz_io4;
+        double fx_ganymede3, fy_ganymede3, fz_ganymede3;
+        double fx_io3, fy_io3, fz_io3;
 
         gravitationalForce(europa, ganymede, fx_europa1, fy_europa1, fz_europa1);
         //cout << fx_europa1 << " " << fy_europa1 << " " << fz_europa1 << endl;
@@ -105,13 +105,14 @@ int main() {
         gravitationalForce(ganymede, Jupiter, fx_ganymede2, fy_ganymede2, fz_ganymede2);
         gravitationalForce(io, Jupiter, fx_io2, fy_io2, fz_io2);
         gravitationalForce(europa, io, fx_europa3, fy_europa3, fz_europa3);
-        gravitationalForce(europa, io, fx_io3, fy_io3, fz_io3);
-        gravitationalForce(ganymede, io, fx_ganymede4, fy_ganymede4, fz_ganymede4);
-        gravitationalForce(ganymede, io, fx_io4, fy_io4, fz_io4);
+        gravitationalForce(europa, io, fx_io1, fy_io1, fz_io1);
+        gravitationalForce(ganymede, io, fx_ganymede3, fy_ganymede3, fz_ganymede3);
+        gravitationalForce(ganymede, io, fx_io3, fy_io3, fz_io3);
 
         // Mise à jour des positions et vitesses
-        updatePositionVelocity(europa, fx_europa1+fx_europa2, fy_europa1+fy_europa2, fz_europa1+fz_europa2, dt);
-        updatePositionVelocity(ganymede, fx_ganymede1+fx_ganymede2, fy_ganymede1+fy_ganymede2, fz_ganymede1+fz_ganymede2, dt);
+        updatePositionVelocity(io, fx_io1+fx_io2+io3, fy_io1+fy_io2+io3, fz_io1+fz_io2+io3, dt);
+        updatePositionVelocity(europa, fx_europa1+fx_europa2+europa3, fy_europa1+fy_europa2+europa3, fz_europa1+fz_europa2+europa3, dt);
+        updatePositionVelocity(ganymede, fx_ganymede1+fx_ganymede2+fx_ganymede3, fy_ganymede1+fy_ganymede2+fy_ganymede3, fz_ganymede1+fz_ganymede2+fz_ganymede3, dt);
 
         // Affichage des positions des satellites
         if (i % 10 == 0) {  // Afficher les positions tous les 10 pas de temps
