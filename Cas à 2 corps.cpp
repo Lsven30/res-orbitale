@@ -76,7 +76,15 @@ int main() {
     Body europa = { 5.0, 0.0, 0.0, 8.84706, 15.0, 0.0, 0.00253 };  // Europa autour de Jupiter
     Body ganymede = { 7.974966, 0.0, 0.0, 7.00421, 11.0, 0.0, 0.0078};  // Ganymède autour de Jupiter
     Body Jupiter = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 100}; // Jupiter
-
+    
+    double vioref=-17324.38;
+    double veuref=13740.3;
+    double vgaref=10883.53;
+    Body europa = { 671900e3, 0.0, 0.0, 0.0, veuref, 0.0, 4.799e22};  // Europa autour de Jupiter
+    Body ganymede = { 1070400e3, 0.0, 0.0, 0.0, vgaref, 0.0, 1.482e23 };  // Ganymède autour de Jupiter
+    Body io = { -421800e3, 0.0, 0.0, 0.0, vioref, 0.0, 8.93e22 };  // Io autour de Jupiter
+    Body Jupiter = { 0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.898e27};  // Jupiter
+    
     // Paramètres de simulation
     double dt = 10.0;  // Pas de temps en secondes
     int numSteps = 100;  // Nombre d'itérations de simulation
