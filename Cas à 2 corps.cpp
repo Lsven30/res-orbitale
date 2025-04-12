@@ -123,6 +123,7 @@ int main() {
         // Affichage des positions des satellites
         if (i % 10 == 0) {  // Afficher les positions tous les 10 pas de temps
             cout << "Step " << i << ":\n";
+            cout << "Io: (" << io.x << ", " << io.y << ", " << io.z << ")\n";
             cout << "Europa: (" << europa.x << ", " << europa.y << ", " << europa.z << ")\n";
             cout << "Ganymede: (" << ganymede.x << ", " << ganymede.y << ", " << ganymede.z << ")\n";
             PosEurope << i << '\t' << europa.x << endl;
