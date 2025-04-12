@@ -52,7 +52,7 @@ void updatePositionVelocity(Body& body1, double fx, double fy, double fz, double
 }
 
     // Constantes
-double steps = 100;   // Nombre d'étapes
+// double steps = 100;   // Nombre d'étapes
 
 // Fonction d'évolution
 void evolve(double x, double y, double vx, double vy) {
@@ -86,8 +86,8 @@ int main() {
     Body Jupiter = { 0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.898e27};  // Jupiter
     
     // Paramètres de simulation
-    double dt = 10.0;  // Pas de temps en secondes
-    int numSteps = 100;  // Nombre d'itérations de simulation
+    double dt = 1000.0;  // Pas de temps en secondes
+    int numSteps = 1000;  // Nombre d'itérations de simulation
 
     PosEurope << 't' << '\t' << 'x' << endl;
 
