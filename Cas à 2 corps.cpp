@@ -90,6 +90,7 @@ int main() {
         // Calcul des forces entre Jupiter et chaque satellite
         double fx_europa2, fy_europa2, fz_europa2;
         double fx_ganymede2, fy_ganymede2, fz_ganymede2;
+        double fx_io2, fy_io2, fz_io2;
         // Calcul forces entre Io et Europa
         double fx_europa3, fy_europa3, fz_europa3;
         double fx_io3, fy_io3, fz_io3;
