@@ -90,12 +90,23 @@ int main() {
         // Calcul des forces entre Jupiter et chaque satellite
         double fx_europa2, fy_europa2, fz_europa2;
         double fx_ganymede2, fy_ganymede2, fz_ganymede2;
+        // Calcul forces entre Io et Europa
+        double fx_europa3, fy_europa3, fz_europa3;
+        double fx_io3, fy_io3, fz_io3;
+         // Calcul forces entre Io et Ganymède
+        double fx_ganymede4, fy_ganymede4, fz_ganymede4;
+        double fx_io4, fy_io4, fz_io4;
 
         gravitationalForce(europa, ganymede, fx_europa1, fy_europa1, fz_europa1);
         //cout << fx_europa1 << " " << fy_europa1 << " " << fz_europa1 << endl;
         gravitationalForce(ganymede, europa, fx_ganymede1, fy_ganymede1, fz_ganymede1);
         gravitationalForce(europa, Jupiter, fx_europa2, fy_europa2, fz_europa2);
         gravitationalForce(ganymede, Jupiter, fx_ganymede2, fy_ganymede2, fz_ganymede2);
+        gravitationalForce(io, Jupiter, fx_io2, fy_io2, fz_io2);
+        gravitationalForce(europa, io, fx_europa3, fy_europa3, fz_europa3);
+        gravitationalForce(europa, io, fx_io3, fy_io3, fz_io3);
+        gravitationalForce(ganymede, io, fx_ganymede4, fy_ganymede4, fz_ganymede4);
+        gravitationalForce(ganymede, io, fx_io4, fy_io4, fz_io4);
 
         // Mise à jour des positions et vitesses
         updatePositionVelocity(europa, fx_europa1+fx_europa2, fy_europa1+fy_europa2, fz_europa1+fz_europa2, dt);
