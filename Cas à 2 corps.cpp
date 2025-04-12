@@ -72,6 +72,7 @@ double rk4(double f(double, double), double t, double y, double h) {
 int main() {
     ofstream PosEurope("Europe.txt");
     // Initialisation des positions et vitesses
+    Body io = {1, 0, 0, 5, 11, 0, 0.0011}; // Io autour de Jupiter
     Body europa = { 5.0, 0.0, 0.0, 8.84706, 15.0, 0.0, 0.00253 };  // Europa autour de Jupiter
     Body ganymede = { 7.974966, 0.0, 0.0, 7.00421, 11.0, 0.0, 0.0078};  // Ganymède autour de Jupiter
     Body Jupiter = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 100}; // Jupiter
