@@ -67,7 +67,9 @@ double rk4(double f(double, double), double t, double y, double h) {
 }
 
 int main() {
+    ofstream PosIo("Io.txt");
     ofstream PosEurope("Europe.txt");
+    ofstream PosGanymede("Ganymede.txt");
     // Initialisation des positions et vitesses
     // Body io = {1, 0, 0, 5, 11, 0, 0.0011}; // Io autour de Jupiter
     // Body europa = { 5.0, 0.0, 0.0, 8.84706, 15.0, 0.0, 0.00253 };  // Europa autour de Jupiter
@@ -86,7 +88,9 @@ int main() {
     double dt = 1000.0;  // Pas de temps en secondes
     int numSteps = 1000;  // Nombre d'itérations de simulation
 
+    PosIo << 't' << '\t' << 'x' << endl;
     PosEurope << 't' << '\t' << 'x' << endl;
+    PosGanydeme << 't' << '\t' << 'x' << endl;
 
     // Simulation des mouvements
     for (int i = 0; i < numSteps; ++i) {
@@ -126,7 +130,9 @@ int main() {
             cout << "Io: (" << io.x << ", " << io.y << ", " << io.z << ")\n";
             cout << "Europa: (" << europa.x << ", " << europa.y << ", " << europa.z << ")\n";
             cout << "Ganymede: (" << ganymede.x << ", " << ganymede.y << ", " << ganymede.z << ")\n";
+            PosIo << i << '\t' << io.x << endl;
             PosEurope << i << '\t' << europa.x << endl;
+            PosGanymede << i << '\t' << ganymede.x << endl;
         }
 
         // Conditions initiales
@@ -142,7 +148,9 @@ int main() {
      }
      */
     }
+    PosIo.close();
     PosEurope.close();
+    PosGanymede.close();
 
     return 0;
 }
