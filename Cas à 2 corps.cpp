@@ -6,9 +6,6 @@ using namespace std;
 double T;
 double a;
 double G = 6.6743*pow(10, -11);
-double M = 100;
-
-
 
 
 // Structure pour représenter un corps céleste
@@ -52,7 +49,7 @@ void updatePositionVelocity(Body& body1, double fx, double fy, double fz, double
 }
 
     // Constantes
-double steps = 100;   // Nombre d'étapes
+// double steps = 100;   // Nombre d'étapes
 
 // Fonction d'évolution
 void evolve(double x, double y, double vx, double vy) {
@@ -70,17 +67,33 @@ double rk4(double f(double, double), double t, double y, double h) {
 }
 
 int main() {
+    ofstream PosIo("Io.txt");
     ofstream PosEurope("Europe.txt");
+    ofstream PosGanymede("Ganymede.txt");
+    ofstream gravio("GravIo.txt");
+    ofstream graveu("GravEu.txt");
+    ofstream gravga("Gravga.txt");
     // Initialisation des positions et vitesses
-    Body europa = { 5.0, 0.0, 0.0, 8.84706, 15.0, 0.0, 0.00253 };  // Europa autour de Jupiter
-    Body ganymede = { 7.974966, 0.0, 0.0, 7.00421, 11.0, 0.0, 0.0078};  // Ganymède autour de Jupiter
-    Body Jupiter = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 100}; // Jupiter
-
+    // Body io = {1, 0, 0, 5, 11, 0, 0.0011}; // Io autour de Jupiter
+    // Body europa = { 5.0, 0.0, 0.0, 8.84706, 15.0, 0.0, 0.00253 };  // Europa autour de Jupiter
+    // Body ganymede = { 7.974966, 0.0, 0.0, 7.00421, 11.0, 0.0, 0.0078};  // Ganymède autour de Jupiter
+    // Body Jupiter = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 100}; // Jupiter
+    
+    double vioref=-17324.38;
+    double veuref=13740.3;
+    double vgaref=10883.53;
+    Body europa = { 671900e3, 0.0, 0.0, 0.0, veuref, 0.0, 4.799e22};  // Europa autour de Jupiter
+    Body ganymede = { 1070400e3, 0.0, 0.0, 0.0, vgaref, 0.0, 1.482e23 };  // Ganymède autour de Jupiter
+    Body io = { -421800e3, 0.0, 0.0, 0.0, vioref, 0.0, 8.93e22 };  // Io autour de Jupiter
+    Body Jupiter = { 0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.898e27};  // Jupiter
+    
     // Paramètres de simulation
-    double dt = 10.0;  // Pas de temps en secondes
-    int numSteps = 100;  // Nombre d'itérations de simulation
+    double dt = 1000.0;  // Pas de temps en secondes
+    int numSteps = 1000;  // Nombre d'itérations de simulation
 
+    PosIo << 't' << '\t' << 'x' << endl;
     PosEurope << 't' << '\t' << 'x' << endl;
+    PosGanymede << 't' << '\t' << 'x' << endl;
 
     // Simulation des mouvements
     for (int i = 0; i < numSteps; ++i) {
@@ -90,24 +103,43 @@ int main() {
         // Calcul des forces entre Jupiter et chaque satellite
         double fx_europa2, fy_europa2, fz_europa2;
         double fx_ganymede2, fy_ganymede2, fz_ganymede2;
+        double fx_io2, fy_io2, fz_io2;
+        // Calcul forces entre Io et Europa
+        double fx_europa3, fy_europa3, fz_europa3;
+        double fx_io1, fy_io1, fz_io1;
+         // Calcul forces entre Io et Ganymède
+        double fx_ganymede3, fy_ganymede3, fz_ganymede3;
+        double fx_io3, fy_io3, fz_io3;
 
         gravitationalForce(europa, ganymede, fx_europa1, fy_europa1, fz_europa1);
         //cout << fx_europa1 << " " << fy_europa1 << " " << fz_europa1 << endl;
         gravitationalForce(ganymede, europa, fx_ganymede1, fy_ganymede1, fz_ganymede1);
         gravitationalForce(europa, Jupiter, fx_europa2, fy_europa2, fz_europa2);
         gravitationalForce(ganymede, Jupiter, fx_ganymede2, fy_ganymede2, fz_ganymede2);
+        gravitationalForce(io, Jupiter, fx_io2, fy_io2, fz_io2);
+        gravitationalForce(europa, io, fx_europa3, fy_europa3, fz_europa3);
+        gravitationalForce(europa, io, fx_io1, fy_io1, fz_io1);
+        gravitationalForce(ganymede, io, fx_ganymede3, fy_ganymede3, fz_ganymede3);
+        gravitationalForce(ganymede, io, fx_io3, fy_io3, fz_io3);
 
         // Mise à jour des positions et vitesses
-        updatePositionVelocity(europa, fx_europa1+fx_europa2, fy_europa1+fy_europa2, fz_europa1+fz_europa2, dt);
-        updatePositionVelocity(ganymede, fx_ganymede1+fx_ganymede2, fy_ganymede1+fy_ganymede2, fz_ganymede1+fz_ganymede2, dt);
+        updatePositionVelocity(io, fx_io1+fx_io2+fx_io3, fy_io1+fy_io2+fy_io3, fz_io1+fz_io2+fz_io3, dt);
+        updatePositionVelocity(europa, fx_europa1+fx_europa2+fx_europa3, fy_europa1+fy_europa2+fy_europa3, fz_europa1+fz_europa2+fz_europa3, dt);
+        updatePositionVelocity(ganymede, fx_ganymede1+fx_ganymede2+fx_ganymede3, fy_ganymede1+fy_ganymede2+fy_ganymede3, fz_ganymede1+fz_ganymede2+fz_ganymede3, dt);
+        gravio  << (i*dt)/86400<< "\t" << G* europa.mass * io.mass / (distance(europa,io)*distance(europa,io)) + G* ganymede.mass * io.mass / (distance(ganymede,io)*distance(ganymede,io))<< endl;
+        graveu  << (i*dt)/86400<< "\t" << G* europa.mass * io.mass / (distance(europa,io)*distance(europa,io)) + G* europa.mass * ganymede.mass / (distance(europa,ganymede)*distance(europa,ganymede)) << endl;
+        gravga  << (i*dt)/86400<< "\t" << G* io.mass * ganymede.mass / (distance(io,ganymede)*distance(io,ganymede)) + G* europa.mass * ganymede.mass / (distance(europa,ganymede)*distance(europa,ganymede)) << endl;
 
         // Affichage des positions des satellites
-        if (i % 10 == 0) {  // Afficher les positions tous les 10 pas de temps
+        // Afficher les positions pour chaque step
             cout << "Step " << i << ":\n";
+            cout << "Io: (" << io.x << ", " << io.y << ", " << io.z << ")\n";
             cout << "Europa: (" << europa.x << ", " << europa.y << ", " << europa.z << ")\n";
             cout << "Ganymede: (" << ganymede.x << ", " << ganymede.y << ", " << ganymede.z << ")\n";
-            PosEurope << i << '\t' << europa.x << endl;
-        }
+            PosIo << i*dt/86400 << '\t' << io.x/1000 << endl;
+            PosEurope << i*dt/86400 << '\t' << europa.x/1000 << endl;
+            PosGanymede << i*dt/86400 << '\t' << ganymede.x/1000 << endl;
+        
 
         // Conditions initiales
     double x = 1.0;
@@ -122,7 +154,12 @@ int main() {
      }
      */
     }
+    PosIo.close();
     PosEurope.close();
+    PosGanymede.close();
+    gravio.close();
+    graveu.close();
+    gravga.close();
 
     return 0;
 }
